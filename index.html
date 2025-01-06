@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>BUFALS</title>
+<style>
+    @font-face {
+        font-family: 'Bufals';
+        src: url('Bufals.otf') format('opentype');
+    }
+    body {
+        font-family: 'Bufals', sans-serif;
+        font-size: 40px;
+        background-image: url('fon.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        overflow: hidden; /* Отключение прокрутки */
+    }
+    /* Сетка для кнопок */
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Три кнопки в один ряд */
+        grid-gap: 30px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        width: auto; /* Автоматическая ширина для центрирования */
+    }
+
+    /* Стили кнопок с красным цветом */
+    .button {
+        background-color: rgba(255, 0, 0, 0.9); /* Красный цвет */
+        border: 3px solid red; /* Красная обводка */
+        color: white;
+        padding: 0px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px; /* Оптимальная ширина для центровки */
+        height: 120px; /* Оптимальная высота */
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Растягивание иконок внутри кнопок */
+    .button img {
+        width: 100%; /* Иконка занимает всю ширину кнопки */
+        height: 100%; /* Иконка занимает всю высоту кнопки */
+        object-fit: cover; /* Сохранение пропорций изображения */
+    }
+
+    /* Эффект наведения */
+    .button:hover {
+        background-color: darkred; /* Темно-красный цвет при наведении */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+        scale: 1.05;
+    }
+       
+       #loading-text {
+            cursor: default;
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Bufals', sans-serif; /* Применение локального шрифта */
+        }
+
+        #loading-text span {
+            display: inline-block;
+            animation: bounce 0.8s ease-in-out infinite alternate;
+            font-size: 40px; /* Уменьшенный размер шрифта */
+            color: red;
+            text-shadow: 0 1px 0 darkred, 0 2px 0 darkred, 0 3px 0 darkred, 0 4px 0 darkred,
+                         0 5px 0 darkred, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
+                        0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
+            transform-origin: bottom;
+        }
+
+        #loading-text span:nth-child(1) { animation-delay: 0s; }
+        #loading-text span:nth-child(2) { animation-delay: 0.1s; }
+        #loading-text span:nth-child(3) { animation-delay: 0.2s; }
+        #loading-text span:nth-child(4) { animation-delay: 0.3s; }
+        #loading-text span:nth-child(5) { animation-delay: 0.4s; }
+        #loading-text span:nth-child(6) { animation-delay: 0.5s; }
+        #loading-text span:nth-child(7) { animation-delay: 0.6s; }
+        #loading-text span:nth-child(8) { animation-delay: 0.7s; }
+        #loading-text span:nth-child(9) { animation-delay: 0.8s; }
+        #loading-text span:nth-child(10) { animation-delay: 0.9s; }
+        #loading-text span:nth-child(11) { animation-delay: 1.1s; }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0px);
+                text-shadow: 0 1px 0 darkred, 0 2px 0 darkred, 0 3px 0 darkred, 0 4px 0 darkred,
+                             0 5px 0 darkred, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
+                             0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
+            }
+            100% {
+                transform: translateY(-10px);
+                text-shadow: 0 1px 0 darkred, 0 2px 0 darkred, 0 3px 0 darkred, 0 4px 0 darkred,
+                             0 5px 0 darkred, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
+                             0 9px 0 transparent, 0 50px 25px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+
+    /* Адаптация для мобильных устройств */
+    @media (max-width: 768px) {
+        .buttons {
+            grid-template-columns: repeat(3, 1fr); /* Одна кнопка в ряд на маленьких экранах */
+            width: 60%; /* Кнопки занимают всю ширину экрана */
+        }
+        .button {
+            width: 100%; /* Кнопки становятся адаптивными */
+            height: auto; /* Уменьшение высоты для мобильных */
+        }
+    }
+
+    h1 {
+        color: white;
+        margin-bottom: 20px;
+        font-size: 50px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .footer-buttons {
+        display: flex;
+        flex-direction: column; /* Вертикальное расположение кнопок */
+        gap: 15px; /* Расстояние между кнопками */
+        margin-top: 10px; /* Отступ сверху */
+    }
+    .question-button, .support-button {
+        letter-spacing: 2px;
+        background-color: red; /* Коралловый цвет */
+        border: none;
+        color: white;
+        padding: 15px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+    .question-button:hover, .support-button:hover {
+        background-color: darkred; /* Темный коралловый цвет для наведения */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+    }
+</style>
+</head>
+<body>
+    <h1 id="loading-text">
+        <span>B</span><span>U</span><span>F</span><span>A</span><span>L</span><span>S</span><span>&nbsp</span><span>S</span><span>O</span><span>F</span><span>T</span>
+    </h1>
+    <div class="buttons">
+        <a href="mines.html" class="button" aria-label="Выбор мин">
+            <img src="mines.jpg" alt="CAVEMINES">
+        </a> 
+        <a href="brawl.html" class="button" aria-label="Выбор черепов">
+            <img src="brawl.jpg" alt="BRAWL PIRATES">
+        </a>
+        <a href="luckyjet.html" class="button" aria-label="Выбор лакиджет">
+            <img src="luckyjet.jpg" alt="LUCKY JET">
+        </a>
+    </div>
+    <div class="footer-buttons">
+        <a href="instruction.html" class="question-button" aria-label="Инструкция">Инструкция</a>
+        <a href="https://t.me/tony_newile" class="support-button" aria-label="Поддержка">Поддержка</a>
+    </div>
+</body>
+</html>
